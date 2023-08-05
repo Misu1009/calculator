@@ -84,6 +84,19 @@ fun CalculatorApp() {
             equation = equation,
             onClickedButtonn = { value ->
                 equation += value
+            },
+            acClickedButton = {
+                if(!(equation=="")){
+                    equation = ""
+                }
+            },
+            backspaceClickedButton = {
+                if(!(equation=="")){
+                    equation = equation.substring(0, equation.length-1)
+                }
+            },
+            equalsClickedButton = {
+                equation = result
             }
         )                                     // 4
     }
@@ -127,65 +140,68 @@ fun tiga(equation: String, result: String){
 @Composable
 fun empat(
     equation: String,
-    onClickedButtonn: (String) -> Unit
+    onClickedButtonn: (String)-> Unit,
+    acClickedButton: (String)-> Unit,
+    backspaceClickedButton: (String)-> Unit,
+    equalsClickedButton: (String)-> Unit
 ){
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Row() {
-            IconSymbol(image = R.drawable.ac, modifier = Modifier.weight(1f),
-                value = "+", equation = equation, onClickedButtonn = onClickedButtonn)//
+            IconSymbol(image = R.drawable.ac, modifier = Modifier.weight(2f),
+                value = "", onClickedButtonn = acClickedButton)//
             IconSymbol(image = R.drawable.baseline_backspace_24, modifier = Modifier.weight(1f),
-                value = "+", equation = equation, onClickedButtonn = onClickedButtonn)//
-            IconSymbol(image = R.drawable.baseline_percent_24, modifier = Modifier.weight(1f),
-                value = "%", equation = equation, onClickedButtonn = onClickedButtonn)
+                value = "", onClickedButtonn = backspaceClickedButton)//
+//            Symbol(image = R.drawable.baseline_percent_24, modifier = Modifier.weight(1f),
+//                value = "%", equation = equation, onClickedButtonn = onClickedButtonn)Icon
             IconSymbol(image = R.drawable.divide, modifier = Modifier.weight(1f),
-                value = "/", equation = equation, onClickedButtonn = onClickedButtonn)
+                value = "/", onClickedButtonn = onClickedButtonn)
         }
         Spacer(modifier = Modifier.height(20.dp))
         Row() {
             IconSymbol(image = R.drawable.seven, modifier = Modifier.weight(1f),
-                value = "7", equation = equation, onClickedButtonn = onClickedButtonn)
+                value = "7", onClickedButtonn = onClickedButtonn)
             IconSymbol(image = R.drawable.eight, modifier = Modifier.weight(1f),
-                value = "8", equation = equation, onClickedButtonn = onClickedButtonn)
+                value = "8", onClickedButtonn = onClickedButtonn)
             IconSymbol(image = R.drawable.nine, modifier = Modifier.weight(1f),
-                value = "9", equation = equation, onClickedButtonn = onClickedButtonn)
+                value = "9", onClickedButtonn = onClickedButtonn)
             IconSymbol(image = R.drawable.times, modifier = Modifier.weight(1f),
-                value = "*", equation = equation, onClickedButtonn = onClickedButtonn)
+                value = "*", onClickedButtonn = onClickedButtonn)
         }
         Spacer(modifier = Modifier.height(20.dp))
         Row() {
             IconSymbol(image = R.drawable.four, modifier = Modifier.weight(1f),
-                value = "4", equation = equation, onClickedButtonn = onClickedButtonn)
+                value = "4", onClickedButtonn = onClickedButtonn)
             IconSymbol(image = R.drawable.five, modifier = Modifier.weight(1f),
-                value = "5", equation = equation, onClickedButtonn = onClickedButtonn)
+                value = "5", onClickedButtonn = onClickedButtonn)
             IconSymbol(image = R.drawable.six, modifier = Modifier.weight(1f),
-                value = "6", equation = equation, onClickedButtonn = onClickedButtonn)
+                value = "6", onClickedButtonn = onClickedButtonn)
             IconSymbol(image = R.drawable.minus, modifier = Modifier.weight(1f),
-                value = "-", equation = equation, onClickedButtonn = onClickedButtonn)
+                value = "-", onClickedButtonn = onClickedButtonn)
         }
         Spacer(modifier = Modifier.height(20.dp))
         Row() {
             IconSymbol(image = R.drawable.one, modifier = Modifier.weight(1f),
-                value = "1", equation = equation, onClickedButtonn = onClickedButtonn)
+                value = "1", onClickedButtonn = onClickedButtonn)
             IconSymbol(image = R.drawable.two, modifier = Modifier.weight(1f),
-                value = "2", equation = equation, onClickedButtonn = onClickedButtonn)
+                value = "2", onClickedButtonn = onClickedButtonn)
             IconSymbol(image = R.drawable.three, modifier = Modifier.weight(1f),
-                value = "3", equation = equation, onClickedButtonn = onClickedButtonn)
+                value = "3", onClickedButtonn = onClickedButtonn)
             IconSymbol(image = R.drawable.baseline_add_24, modifier = Modifier.weight(1f),
-                value = "+", equation = equation, onClickedButtonn = onClickedButtonn)
+                value = "+", onClickedButtonn = onClickedButtonn)
         }
         Spacer(modifier = Modifier.height(20.dp))
         Row() {
-            IconSymbol(image = R.drawable.wide, modifier = Modifier.weight(1f),
-                value = "+", equation = equation, onClickedButtonn = onClickedButtonn)
+//            IconSymbol(image = R.drawable.wide, modifier = Modifier.weight(1f),
+//                value = "", equation = equation, onClickedButtonn = onClickedButtonn)
             IconSymbol(image = R.drawable.zero, modifier = Modifier.weight(1f),
-                value = "0", equation = equation, onClickedButtonn = onClickedButtonn)
+                value = "0", onClickedButtonn = onClickedButtonn)
             IconSymbol(image = R.drawable.dot, modifier = Modifier.weight(1f), size = 10,
-                value = ".", equation = equation, onClickedButtonn = onClickedButtonn)//
-            IconSymbol(image = R.drawable.equal, modifier = Modifier.weight(1f),
-                value = "+", equation = equation, onClickedButtonn = onClickedButtonn)//
+                value = ".", onClickedButtonn = onClickedButtonn)//
+            IconSymbol(image = R.drawable.equal, modifier = Modifier.weight(2f),
+                value = "+", onClickedButtonn = equalsClickedButton)//
         }
     }
 }
@@ -196,7 +212,6 @@ fun IconSymbol(
     value: String,
     modifier: Modifier= Modifier,
     size: Int = 30,
-    equation: String,
     onClickedButtonn: (String)->Unit
 ){
     Box(
